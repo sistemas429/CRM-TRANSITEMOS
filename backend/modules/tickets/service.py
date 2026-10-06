@@ -11,12 +11,12 @@ class TicketService:
         return self.repository.create(title, body, priority, area.id, user_id)
 
     def list_tickets(self, user_id: int, role: str, skip: int, limit: int):
-        if role == "admin":
+        if role in ("admin", "tecnico"):
             return self.repository.list_all(skip, limit)
         return self.repository.list_by_user(user_id, skip, limit)
 
-    def update_status(self, ticket_id: int, new_status: str):
+    def update_status(self, ticket_id: int, new_status: str, username: str | None = None):
         ticket = self.repository.get_by_id(ticket_id)
         if not ticket:
             raise ValueError("Ticket no encontrado")
-        return self.repository.update_status(ticket, new_status)
+        return self.repository.update_status(ticket, new_status, username)

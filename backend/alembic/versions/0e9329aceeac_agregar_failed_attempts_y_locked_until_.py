@@ -28,7 +28,11 @@ def upgrade() -> None:
     sa.UniqueConstraint('name')
     )
     op.create_index(op.f('ix_areas_id'), 'areas', ['id'], unique=False)
-    op.add_column('tickets', sa.Column('area_id', sa.Integer(), nullable=False))
+    op.add_column('tickets', sa.Column('area_id', sa.Integer(), nullable=True))
+    # Crear el área "General" si no existe y asignarla a los tickets existentes
+    op.execute("INSERT INTO areas (name) SELECT 'General' WHERE NOT EXISTS (SELECT 1 FROM areas WHERE name = 'General')")
+    op.execute("UPDATE tickets SET area_id = (SELECT id FROM areas WHERE name = 'General' LIMIT 1) WHERE area_id IS NULL")
+    op.alter_column('tickets', 'area_id', nullable=False)
     op.create_foreign_key(None, 'tickets', 'areas', ['area_id'], ['id'])
     op.drop_column('tickets', 'area')
     op.add_column('users', sa.Column('is_active', sa.Boolean(), nullable=False, server_default='true'))

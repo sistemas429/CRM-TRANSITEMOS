@@ -109,3 +109,170 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+/* Reseteo completo del viewport global */
+html, body, #root {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  min-height: 100vh !important;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+}
+/* Modo oscuro: invierte el fondo principal y textos sueltos */
+body.dark .app-layout { background: #0f172a !important; }
+body.dark .app-layout main { background: #0f172a; color: #e2e8f0; }
+body.dark .app-layout h1, body.dark .app-layout h2, body.dark .app-layout h3 { color: #e2e8f0 !important; }
+
+/* Responsive: sidebar más angosta en pantallas pequeñas */
+@media (max-width: 768px) {
+  .app-layout aside { width: 70px !important; }
+  .app-layout aside nav a, .app-layout aside nav div { font-size: 0 !important; }
+  .app-layout aside nav a span, .app-layout aside span { font-size: 0.7rem !important; }
+  .app-layout aside img { width: 40px !important; }
+}
+
+/* ===== Inter font: base profesional ===== */
+* { font-family: 'Inter', 'Segoe UI', system-ui, sans-serif !important; }
+
+input, select, textarea, button { font-family: inherit !important; }
+input:focus, select:focus, textarea:focus {
+  outline: 2px solid #0072bc !important;
+  outline-offset: 1px;
+}
+button:hover { filter: brightness(1.08); }
+table tbody tr:hover { background: #f1f5f9; }
+
+/* ===== Tipografía de títulos ===== */
+h1 { letter-spacing: -0.5px; }
+
+
+/* ===== Navegación: hover y transiciones ===== */
+.app-layout aside nav a { transition: background 0.15s ease, color 0.15s ease; border-radius: 6px; }
+.app-layout aside nav a:hover { background: rgba(255,255,255,0.1) !important; color: #ffffff !important; }
+.app-layout aside nav a:visited, .app-layout aside nav a:link { text-decoration: none !important; }
+
+
+/* ===== Tablas más limpias ===== */
+table thead th { letter-spacing: 0.5px; font-size: 0.72rem; }
+button:disabled { opacity: 0.5; cursor: not-allowed !important; }
+
+
+/* ===== Ajuste visual tipo panel administrativo ===== */
+body { background: #f8fafc !important; }
+.app-layout { background: #f8fafc !important; }
+.app-layout main { background: #f8fafc; }
+.app-layout aside nav a { border-radius: 8px; margin-bottom: 2px; }
+/* Tarjetas más limpias */
+div[style*='borderRadius: 8px'], div[style*='borderRadius: 10px'] { box-shadow: 0 2px 10px rgba(15, 55, 100, 0.06) !important; }
+
+
+/* Sidebar colapsada: oculta títulos y recorta texto de links */
+.nav-collapsed > div > div:first-child { display: none !important; }
+.nav-collapsed a { white-space: nowrap; overflow: hidden; padding: 7px 4px !important; justify-content: center; }
+
+
+/* ===== Tablas profesionales ===== */
+table thead th { background: #f1f5f9; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: #475569; border-bottom: 2px solid #e2e8f0; }
+table tbody tr { transition: background 0.15s ease; }
+table tbody tr:hover { background: #f8fafc; }
+/* ===== Controles uniformes ===== */
+input, select, textarea { border-radius: 8px !important; border: 1px solid #cbd5e1 !important; background: #ffffff; }
+input:focus, select:focus, textarea:focus { outline: none !important; border-color: #0072bc !important; box-shadow: 0 0 0 3px rgba(0,114,188,0.15); }
+button { border-radius: 8px !important; font-weight: 700 !important; letter-spacing: 0.3px; transition: all 0.15s ease; }
+button:hover { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(2, 62, 138, 0.15); }
+/* ===== Tarjetas de página ===== */
+div[style*='borderRadius: 10px'] { box-shadow: 0 6px 18px rgba(15, 55, 100, 0.08) !important; }
+
+
+/* ===== Modo oscuro profesional ===== */
+body.dark { background: #0b1220 !important; }
+body.dark .app-layout { background: #0b1220 !important; }
+body.dark .app-layout main { background: #0b1220 !important; color: #cbd5e1; }
+body.dark .app-layout main h1, body.dark .app-layout main h2, body.dark .app-layout main h3 { color: #e2e8f0 !important; }
+body.dark .app-layout main p { color: #94a3b8 !important; }
+/* Tarjetas blancas -> slate oscuro */
+body.dark .app-layout main div[style*='background: #ffffff'],
+body.dark .app-layout main div[style*='background:#ffffff'] { background: #1e293b !important; border-color: #334155 !important; color: #e2e8f0 !important; }
+/* Inputs */
+body.dark input, body.dark select, body.dark textarea { background: #1e293b !important; color: #e2e8f0 !important; border-color: #334155 !important; }
+body.dark table thead th { background: #0f172a !important; color: #94a3b8 !important; border-bottom-color: #334155 !important; }
+body.dark table tbody tr:hover { background: #334155 !important; }
+body.dark .error-banner, body.dark div[style*='background: #f8d7da'] { background: #7f1d1d !important; color: #fca5a5 !important; border-color: #7f1d1d !important; }
+
+
+/* Sombra 3D sutil en tarjetas de gráficos */
+.chart-card { filter: drop-shadow(0 6px 12px rgba(2, 62, 138, 0.08)); }
+
+
+/* Texto oscuro en opciones de selects (modo oscuro) */
+body.dark select option { color: #1e293b !important; }
+body.dark select { color: #1e293b !important; }
+
+
+/* ===== Modo oscuro: contraste profesional ===== */
+body.dark { background: #0f172a !important; }
+body.dark .app-layout { background: #0f172a !important; }
+body.dark .app-layout main { background: #0f172a !important; }
+body.dark .app-layout main h1, body.dark .app-layout main h2, body.dark .app-layout main h3 { color: #f1f5f9 !important; }
+body.dark .app-layout main p { color: #cbd5e1 !important; }
+body.dark .app-layout main div[style*='background: #ffffff'], body.dark .app-layout main div[style*='background:#ffffff'] { background: #1e293b !important; border: 1px solid #334155 !important; color: #e2e8f0 !important; box-shadow: 0 4px 12px rgba(0,0,0,0.35) !important; }
+body.dark .app-layout main div[style*='background: #f8fafc'], body.dark .app-layout main div[style*='background:#f8fafc'] { background: #334155 !important; }
+body.dark table thead th { background: #0f172a !important; color: #e2e8f0 !important; border-bottom: 2px solid #334155 !important; }
+body.dark table tbody td { color: #e2e8f0 !important; border-bottom-color: #334155 !important; }
+body.dark table tbody tr:hover { background: #334155 !important; }
+body.dark input, body.dark select, body.dark textarea { background: #1e293b !important; color: #f1f5f9 !important; border: 1px solid #475569 !important; }
+body.dark select option { color: #1e293b !important; background: #ffffff !important; }
+body.dark div[style*='background: #f8d7da'] { background: #7f1d1d !important; color: #fecaca !important; }
+body.dark button { color: #f1f5f9; }
+
+
+:root { --card-bg: #ffffff; }
+body.dark { --card-bg: #1e293b; }
+body.dark .app-layout main * { color: #e2e8f0 !important; }
+body.dark .app-layout main div[style*='border:'] { border-color: #334155 !important; }
+body.dark select option { background: #ffffff !important; color: #1e293b !important; }
+:root { color-scheme: light; }
+body.dark { color-scheme: dark; }
+
+
+/* ===== Modo oscuro: blanco y azul ===== */
+body.dark { background: #0b2a4a !important; }
+body.dark .app-layout { background: #0b2a4a !important; }
+body.dark .app-layout main { background: #0b2a4a !important; }
+body.dark .app-layout main * { color: #0b4f78 !important; }
+body.dark .app-layout main div[style*='#ffffff'], body.dark .app-layout main div[style*='ffffff'] { background: #ffffff !important; border-color: #cfe3f5 !important; color: #0b4f78 !important; box-shadow: 0 4px 12px rgba(0,0,0,0.18) !important; }
+body.dark .app-layout main h1, body.dark .app-layout main h2, body.dark .app-layout main h3, body.dark .app-layout main th { color: #2a5ea8 !important; }
+body.dark table thead th { background: #e8f4fd !important; color: #2a5ea8 !important; border-bottom: 2px solid #cfe3f5 !important; }
+body.dark table tbody td { color: #1e5a8a !important; }
+body.dark table tbody tr:hover { background: #f0f8ff !important; }
+body.dark input, body.dark select, body.dark textarea { background: #ffffff !important; color: #0b4f78 !important; border: 1px solid #bcd9f0 !important; }
+body.dark select option { background: #ffffff !important; color: #0b4f78 !important; }
+body.dark button { color: #ffffff; }
+
+
+body.dark { --card-bg: #ffffff; }
+
+
+/* ===== Modo oscuro: blanco con toques de azul ===== */
+body.dark { background: #eef5ff !important; }
+body.dark .app-layout { background: #eef5ff !important; }
+body.dark .app-layout main { background: #eef5ff !important; }
+body.dark .app-layout main * { color: #0b4f78 !important; }
+body.dark .app-layout main div[style*='#ffffff'], body.dark .app-layout main div[style*='ffffff'] { background: #ffffff !important; border-color: #d6e9f8 !important; color: #0b4f78 !important; box-shadow: 0 4px 12px rgba(2, 62, 138, 0.10) !important; }
+body.dark .app-layout main h1, body.dark .app-layout main h2, body.dark .app-layout main h3, body.dark .app-layout main th { color: #2a5ea8 !important; }
+body.dark table thead th { background: #e8f4fd !important; color: #2a5ea8 !important; border-bottom: 2px solid #cfe3f5 !important; }
+body.dark table tbody td { color: #1e5a8a !important; }
+
+
+
+
+
+/* Ajustes varios */
+table thead th { text-align: center !important; }
+table tbody tr:hover { background: #e0f2fe !important; }
+
+
+
+

@@ -21,6 +21,7 @@ class Ticket(Base):
     status = Column(String, nullable=False, default="Abierto")
     area_id = Column(Integer, ForeignKey("areas.id"), nullable=False)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    updated_by = Column(String, nullable=True)
     created_at = Column(DateTime, server_default=func.now())
     updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
 

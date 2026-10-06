@@ -6,7 +6,7 @@ from pydantic import BaseModel, ConfigDict
 class TicketCreate(BaseModel):
     title: str
     body: str | None = None
-    priority: Literal["Alta", "Media", "Baja"]
+    priority: Literal["Alta", "Media", "Baja", "Urgente"]
     area: str
 
 class TicketUpdate(BaseModel):
@@ -20,6 +20,7 @@ class TicketResponse(BaseModel):
     status: str
     area: str
     user_id: int
+    updated_by: str | None = None
     created_at: datetime
     updated_at: datetime
 
@@ -37,6 +38,7 @@ class TicketResponse(BaseModel):
             status=ticket.status,
             area=ticket.area.name,
             user_id=ticket.user_id,
+            updated_by=getattr(ticket, "updated_by", None),
             created_at=ticket.created_at,
             updated_at=ticket.updated_at,
         )

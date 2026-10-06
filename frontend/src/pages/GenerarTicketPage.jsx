@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AppLayout from '../layouts/AppLayout';
+import { apiFetch } from '../apiClient';
+import { ErrorBanner } from '../components/Feedback';
+import { useToast } from '../context/ToastContext';
 
 export default function GenerarTicketPage() {
+  const { showToast } = useToast() || {};
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [loadingUsers, setLoadingUsers] = useState(true);
@@ -18,33 +22,24 @@ export default function GenerarTicketPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  // Cargar únicamente los usuarios reales registrados en la API
   useEffect(() => {
-    fetchUsers();
+    fetchAreas();
   }, []);
 
-  const fetchUsers = async () => {
+  const fetchAreas = async () => {
     setLoadingUsers(true);
     try {
-      const token = localStorage.getItem('token');
-      const res = await fetch('http://127.0.0.1:8000/users/', {
-        headers: {
-          'Authorization': token ? `Bearer ${token}` : '',
-          'Accept': 'application/json'
-        }
-      });
+      const res = await apiFetch('/areas/');
 
       if (res.ok) {
         const data = await res.json();
         if (Array.isArray(data) && data.length > 0) {
           setUsers(data);
-          // Asigna el primer usuario/área obtenido por defecto
-          const initialUser = data[0].username || data[0].full_name || data[0].email || data[0].name;
-          setFormData(prev => ({ ...prev, area: initialUser }));
+          setFormData(prev => ({ ...prev, area: data[0].name }));
         }
       }
     } catch (err) {
-      console.error("Error al cargar usuarios de la API:", err);
+      console.error("Error al cargar áreas de la API:", err);
     } finally {
       setLoadingUsers(false);
     }
@@ -53,7 +48,7 @@ export default function GenerarTicketPage() {
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.name === 'title' ? e.target.value.toUpperCase() : e.target.value
     });
   };
 
@@ -63,20 +58,16 @@ export default function GenerarTicketPage() {
     setError('');
 
     try {
-      const token = localStorage.getItem('token');
-      const res = await fetch('http://127.0.0.1:8000/tickets/', {
+      const res = await apiFetch('/tickets/', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': token ? `Bearer ${token}` : ''
-        },
-        body: JSON.stringify(formData)
+        body: formData
       });
 
       if (!res.ok) {
         throw new Error('No se pudo guardar el ticket. Verifica la conexión con el servidor.');
       }
 
+      showToast('Ticket creado correctamente');
       navigate('/tickets');
     } catch (err) {
       setError(err.message);
@@ -85,21 +76,47 @@ export default function GenerarTicketPage() {
     }
   };
 
+  // Estilos forzados para garantizar fondo blanco en todos los bloques de texto
+  const inputStyle = {
+    width: '100%',
+    padding: '10px 14px',
+    fontSize: '0.9rem',
+    borderRadius: '6px',
+    border: '1px solid #ced4da',
+    backgroundColor: '#ffffff',
+    color: '#212529',
+    outline: 'none',
+    boxSizing: 'border-box'
+  };
+
+  const labelStyle = {
+    display: 'block',
+    fontSize: '0.75rem',
+    fontWeight: 700,
+    color: '#495057',
+    marginBottom: '6px',
+    letterSpacing: '0.5px',
+    textTransform: 'uppercase'
+  };
+
   return (
     <AppLayout>
-      <div style={{ maxWidth: '700px', margin: '0 auto', background: '#ffffff', padding: '30px', borderRadius: '8px', border: '1px solid #e9ecef', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
-        <h2 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#0d4b75', marginBottom: '8px' }}>➕ Generar Nuevo Ticket</h2>
-        <p style={{ fontSize: '0.85rem', color: '#6c757d', marginBottom: '24px' }}>Diligencia la información para aperturar una solicitud formal.</p>
+      <div style={{ maxWidth: '680px', margin: '20px auto 0', background: 'var(--card-bg, #ffffff)', padding: '30px 36px', borderRadius: '10px', border: '1px solid #e9ecef', boxShadow: '0 2px 8px rgba(0,0,0,0.05)' }}>
+        
+        <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0d4b75', margin: 0 }}>
+            ➕ Generar Nuevo Ticket
+          </h2>
+          <p style={{ fontSize: '0.85rem', color: '#6c757d', marginTop: '6px' }}>
+            Diligencia la información para aperturar una solicitud formal.
+          </p>
+        </div>
 
-        {error && (
-          <div style={{ background: '#f8d7da', color: '#721c24', padding: '12px', borderRadius: '6px', marginBottom: '20px', fontSize: '0.85rem' }}>
-            ⚠️ {error}
-          </div>
-        )}
+        <ErrorBanner message={error} />
 
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
           <div>
-            <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#495057', marginBottom: '6px' }}>TÍTULO DEL TICKET</label>
+            <label style={labelStyle}>TÍTULO DEL TICKET</label>
             <input 
               type="text" 
               name="title" 
@@ -107,39 +124,36 @@ export default function GenerarTicketPage() {
               onChange={handleChange} 
               required 
               placeholder="Ej: Requerimiento de acceso" 
-              style={{ width: '100%', padding: '10px', fontSize: '0.9rem', border: '1px solid #ced4da', borderRadius: '4px' }} 
+              style={{ ...inputStyle, textTransform: 'uppercase' }}
             />
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '18px' }}>
             <div>
-              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#495057', marginBottom: '6px' }}>ASIGNAR A (USUARIOS API)</label>
+              <label style={labelStyle}>ÁREA</label>
               <select 
                 name="area" 
                 value={formData.area} 
                 onChange={handleChange} 
                 disabled={loadingUsers}
-                style={{ width: '100%', padding: '10px', fontSize: '0.9rem', border: '1px solid #ced4da', borderRadius: '4px', background: '#fff' }}>
+                style={{ ...inputStyle, cursor: 'pointer' }}>
                 {loadingUsers ? (
-                  <option value="">Cargando usuarios...</option>
+                  <option value="">Cargando áreas...</option>
                 ) : users.length === 0 ? (
-                  <option value="General">Sin usuarios en API</option>
+                  <option value="General">Sin áreas en API</option>
                 ) : (
-                  users.map((u, index) => {
-                    const nameDisplay = u.username || u.full_name || u.email || u.name || `Usuario ${u.id || index + 1}`;
-                    return (
-                      <option key={u.id || index} value={nameDisplay}>
-                        {nameDisplay}
-                      </option>
-                    );
-                  })
+                  users.map((u, index) => (
+                    <option key={u.id || index} value={u.name}>
+                      {u.name}
+                    </option>
+                  ))
                 )}
               </select>
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#495057', marginBottom: '6px' }}>PRIORIDAD</label>
-              <select name="priority" value={formData.priority} onChange={handleChange} style={{ width: '100%', padding: '10px', fontSize: '0.9rem', border: '1px solid #ced4da', borderRadius: '4px' }}>
+              <label style={labelStyle}>PRIORIDAD</label>
+              <select name="priority" value={formData.priority} onChange={handleChange} style={{ ...inputStyle, cursor: 'pointer' }}>
                 <option value="Baja">Baja</option>
                 <option value="Media">Media</option>
                 <option value="Alta">Alta</option>
@@ -149,7 +163,7 @@ export default function GenerarTicketPage() {
           </div>
 
           <div>
-            <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#495057', marginBottom: '6px' }}>DESCRIPCIÓN / CUERPO</label>
+            <label style={labelStyle}>DESCRIPCIÓN / CUERPO</label>
             <textarea 
               name="body" 
               rows="4" 
@@ -157,21 +171,29 @@ export default function GenerarTicketPage() {
               onChange={handleChange} 
               required 
               placeholder="Detalla el problema o requerimiento..." 
-              style={{ width: '100%', padding: '10px', fontSize: '0.9rem', resize: 'vertical', border: '1px solid #ced4da', borderRadius: '4px' }}
+              style={{ ...inputStyle, resize: 'vertical' }}
             ></textarea>
           </div>
 
-          <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
+          {/* Vista previa de lo que se está diligenciando */}
+          <div style={{ background: '#f8fafc', border: '1px dashed #94a3b8', borderRadius: '8px', padding: '14px 16px' }}>
+            <h4 style={{ margin: '0 0 8px', fontSize: '0.78rem', fontWeight: 800, color: '#475569', textTransform: 'uppercase' }}>Vista previa del ticket</h4>
+            <p style={{ margin: '0 0 4px', fontSize: '0.85rem' }}><strong>Título:</strong> {formData.title || '—'}</p>
+            <p style={{ margin: '0 0 4px', fontSize: '0.85rem' }}><strong>Área:</strong> {formData.area || '—'} · <strong>Prioridad:</strong> {formData.priority}</p>
+            <p style={{ margin: 0, fontSize: '0.85rem', whiteSpace: 'pre-wrap' }}><strong>Descripción:</strong> {formData.body || '—'}</p>
+          </div>
+
+          <div style={{ display: 'flex', gap: '12px', marginTop: '10px' }}>
             <button 
               type="submit" 
               disabled={loading}
-              style={{ flex: 1, background: '#007bff', color: '#ffffff', border: 'none', padding: '12px', borderRadius: '6px', fontWeight: 600, cursor: 'pointer' }}>
+              style={{ flex: 1, background: '#1d4ed8', color: '#ffffff', border: 'none', padding: '11px', borderRadius: '6px', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer' }}>
               {loading ? 'Guardando...' : 'Guardar Ticket'}
             </button>
             <button 
               type="button" 
               onClick={() => navigate('/tickets')}
-              style={{ background: '#e9ecef', color: '#495057', border: 'none', padding: '12px 20px', borderRadius: '6px', fontWeight: 600, cursor: 'pointer' }}>
+              style={{ background: '#e9ecef', color: '#495057', border: 'none', padding: '11px 20px', borderRadius: '6px', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer' }}>
               Cancelar
             </button>
           </div>
@@ -180,3 +202,6 @@ export default function GenerarTicketPage() {
     </AppLayout>
   );
 }
+
+
+

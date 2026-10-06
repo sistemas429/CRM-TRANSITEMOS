@@ -24,8 +24,10 @@ class TicketRepository:
     def get_by_id(self, ticket_id: int) -> Ticket | None:
         return self.db.query(Ticket).filter(Ticket.id == ticket_id).first()
 
-    def update_status(self, ticket: Ticket, new_status: str) -> Ticket:
+    def update_status(self, ticket: Ticket, new_status: str, username: str | None = None) -> Ticket:
         ticket.status = new_status
+        if username is not None:
+            ticket.updated_by = username
         self.db.commit()
         self.db.refresh(ticket)
         return ticket

@@ -67,3 +67,32 @@ class UserManagementService:
         if not role:
             raise ValueError(f"El rol '{role_name}' no existe")
         return self.repository.set_role(user, role.id)
+
+    def delete_role(self, role_id: int):
+        from .models import User, Role
+        role = self.repository.db.query(Role).get(role_id)
+        if not role:
+            raise ValueError("Rol no encontrado")
+        count = self.repository.db.query(User).filter(User.role_id == role_id).count()
+        if count > 0:
+            raise ValueError("No se puede eliminar el rol porque tiene usuarios asignados")
+        self.repository.db.delete(role)
+        self.repository.db.commit()
+        return role
+
+    def reset_password(self, user_id: int, new_password: str):
+        user = self.repository.get_by_id(user_id)
+        if not user:
+            raise ValueError("Usuario no encontrado")
+        user.hashed_password = hash_password(new_password)
+        self.repository.db.commit()
+        self.repository.db.refresh(user)
+        return user
+
+    def delete_user(self, user_id: int):
+        user = self.repository.get_by_id(user_id)
+        if not user:
+            raise ValueError("Usuario no encontrado")
+        self.repository.db.delete(user)
+        self.repository.db.commit()
+        return user

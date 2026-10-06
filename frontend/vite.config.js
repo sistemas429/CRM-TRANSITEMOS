@@ -22,6 +22,13 @@ export default defineConfig({
     proxy: {
       "/auth": apiProxy,
       "/tickets": apiProxy,
+      "/areas": apiProxy,
+      "/metrics": apiProxy,
     },
+  },
+  test: {
+    environment: "jsdom",
+    globals: true,
+    setupFiles: "./src/test/setup.js",
   },
 });

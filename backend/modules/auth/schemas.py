@@ -7,6 +7,13 @@ class LoginRequest(BaseModel):
     username: str
     password: str
 
+class RefreshRequest(BaseModel):
+    refresh_token: str
+
+class RoleCreate(BaseModel):
+    name: str
+    description: str | None = None
+
 class TokenResponse(BaseModel):
     access_token: str
     refresh_token: str
@@ -39,3 +46,6 @@ class UserResponse(BaseModel):
 
 class RoleUpdate(BaseModel):
     role: Literal["admin", "tecnico", "solicitante"]
+
+class PasswordReset(BaseModel):
+    password: str
