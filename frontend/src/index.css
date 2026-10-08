@@ -276,3 +276,9 @@ table tbody tr:hover { background: #e0f2fe !important; }
 
 
 
+
+/* Ajustes globales */
+table tbody tr:nth-child(even) { background: #f8fafc !important; }
+.app-layout main div[style*='borderRadius: 10px'] { transition: box-shadow 0.2s ease; }
+.app-layout main div[style*='borderRadius: 10px']:hover { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important; }
+

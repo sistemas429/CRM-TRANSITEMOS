@@ -68,7 +68,7 @@ export default function DashboardPage() {
               whileTap={{ scale: 0.95 }}
               onClick={() => navigate('/crear-ticket')}
               style={{ 
-                background: '#1d4ed8', 
+                background: '#2563eb', 
                 color: '#ffffff', 
                 border: 'none', 
                 padding: '8px 16px', 
@@ -111,25 +111,25 @@ export default function DashboardPage() {
           <>
             {/* TARJETAS KPI FLUIDAS */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, minmax(0, 1fr))', gap: '14px', marginBottom: '20px', width: '100%' }}>
-              <KpiCard title="TOTAL TICKETS" count={totalTickets} color="#1d4ed8" onClick={() => navigate('/tickets')} />
-              <KpiCard title="ABIERTOS" count={abiertos} color="#1d4ed8" onClick={() => navigate('/tickets')} />
-              <KpiCard title="EN PROCESO" count={enProceso} color="#1d4ed8" onClick={() => navigate('/tickets')} />
-              <KpiCard title="RESUELTOS" count={resueltos} color="#1d4ed8" onClick={() => navigate('/tickets')} />
-              <KpiCard title="CERRADOS" count={cerrados} color="#1d4ed8" onClick={() => navigate('/tickets')} />
+              <KpiCard title="TOTAL TICKETS" count={totalTickets} color="#2563eb" onClick={() => navigate('/tickets')} />
+              <KpiCard title="ABIERTOS" count={abiertos} color="#2563eb" onClick={() => navigate('/tickets')} />
+              <KpiCard title="EN PROCESO" count={enProceso} color="#2563eb" onClick={() => navigate('/tickets')} />
+              <KpiCard title="RESUELTOS" count={resueltos} color="#2563eb" onClick={() => navigate('/tickets')} />
+              <KpiCard title="CERRADOS" count={cerrados} color="#2563eb" onClick={() => navigate('/tickets')} />
             </div>
 
             {/* PANELES DE DIBUJO */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: '16px', marginBottom: '20px', width: '100%' }}>
               
               {/* POR ESTADO */}
-              <div style={{ background: 'var(--card-bg, #ffffff)', padding: '16px', borderRadius: '8px', border: '1px solid #e2e8f0', boxShadow: '0 1px 3px rgba(0,0,0,0.03)', height: '220px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxSizing: 'border-box' }}>
+              <div style={{ background: 'var(--card-bg, #ffffff)', padding: '16px', borderRadius: '10px', border: '1px solid #e2e8f0', boxShadow: '0 1px 3px rgba(0,0,0,0.03)', height: '220px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxSizing: 'border-box' }}>
                 <h3 style={{ fontSize: '0.78rem', fontWeight: 800, color: '#4b5563', letterSpacing: '0.5px', margin: 0, textTransform: 'uppercase', textAlign: 'center' }}>POR ESTADO</h3>
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1, filter: 'drop-shadow(0 6px 10px rgba(2, 62, 138, 0.12))' }}>
                   <ResponsiveContainer width="100%" height={130}>
                     <PieChart>
                       <Pie data={[{ name: 'Abiertos', value: abiertos }, { name: 'En proceso', value: enProceso }, { name: 'Resueltos', value: resueltos }, { name: 'Cerrados', value: cerrados }]} dataKey="value" nameKey="name" innerRadius={30} outerRadius={55} paddingAngle={3} stroke="#fff" strokeWidth={2}>
-                        <Cell fill="#1d4ed8" />
-                        <Cell fill="#1d4ed8" />
+                        <Cell fill="#2563eb" />
+                        <Cell fill="#2563eb" />
                         <Cell fill="#93c5fd" />
                         <Cell fill="#cbd5e1" />
                       </Pie>
@@ -139,12 +139,12 @@ export default function DashboardPage() {
                 </div>
                 <div style={{ fontSize: '0.75rem', color: '#6c757d', textAlign: 'center', fontWeight: 700 }}>
                   <span style={{ color: '#0b4f78' }}>• Abiertos: {abiertos}</span> &nbsp;|&nbsp; 
-                  <span style={{ color: '#1d4ed8' }}>• Resueltos: {resueltos}</span>
+                  <span style={{ color: '#2563eb' }}>• Resueltos: {resueltos}</span>
                 </div>
               </div>
 
               {/* POR PRIORIDAD */}
-              <div style={{ background: 'var(--card-bg, #ffffff)', padding: '16px', borderRadius: '8px', border: '1px solid #e2e8f0', boxShadow: '0 1px 3px rgba(0,0,0,0.03)', height: '220px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxSizing: 'border-box' }}>
+              <div style={{ background: 'var(--card-bg, #ffffff)', padding: '16px', borderRadius: '10px', border: '1px solid #e2e8f0', boxShadow: '0 1px 3px rgba(0,0,0,0.03)', height: '220px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxSizing: 'border-box' }}>
                 <h3 style={{ fontSize: '0.78rem', fontWeight: 800, color: '#4b5563', letterSpacing: '0.5px', margin: 0, textTransform: 'uppercase', textAlign: 'center' }}>POR PRIORIDAD</h3>
                 <div style={{ display: 'flex', alignItems: 'flex-end', height: '110px' }}>
                   <ResponsiveContainer width="100%" height="100%">
@@ -164,7 +164,7 @@ export default function DashboardPage() {
               </div>
 
               {/* POR DEPARTAMENTO */}
-              <div style={{ background: 'var(--card-bg, #ffffff)', padding: '16px', borderRadius: '8px', border: '1px solid #e2e8f0', boxShadow: '0 1px 3px rgba(0,0,0,0.03)', height: '220px', display: 'flex', flexDirection: 'column', boxSizing: 'border-box' }}>
+              <div style={{ background: 'var(--card-bg, #ffffff)', padding: '16px', borderRadius: '10px', border: '1px solid #e2e8f0', boxShadow: '0 1px 3px rgba(0,0,0,0.03)', height: '220px', display: 'flex', flexDirection: 'column', boxSizing: 'border-box' }}>
                 <h3 style={{ fontSize: '0.78rem', fontWeight: 800, color: '#4b5563', letterSpacing: '0.5px', margin: '0 0 12px 0', textTransform: 'uppercase', textAlign: 'center' }}>POR DEPARTAMENTO</h3>
                 <div style={{ flex: 1, width: '100%' }}>
                   {Object.keys(areasMap).length === 0 ? (
@@ -185,7 +185,7 @@ export default function DashboardPage() {
             </div>
 
             {/* TABLA DE TICKETS RECIENTES */}
-            <div style={{ background: 'var(--card-bg, #ffffff)', padding: '20px', borderRadius: '8px', border: '1px solid #e2e8f0', boxShadow: '0 1px 3px rgba(0,0,0,0.03)', width: '100%', boxSizing: 'border-box' }}>
+            <div style={{ background: 'var(--card-bg, #ffffff)', padding: '20px', borderRadius: '10px', border: '1px solid #e2e8f0', boxShadow: '0 1px 3px rgba(0,0,0,0.03)', width: '100%', boxSizing: 'border-box' }}>
               <h3 style={{ fontSize: '0.78rem', fontWeight: 800, color: '#4b5563', letterSpacing: '0.5px', marginBottom: '16px', textTransform: 'uppercase', textAlign: 'center' }}>TICKETS RECIENTES</h3>
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.82rem' }}>
                 <thead>
@@ -206,7 +206,7 @@ export default function DashboardPage() {
                   ) : (
                     tickets.map((t) => (
                       <tr key={t.id} style={{ borderBottom: '1px solid #e2e8f0', textAlign: 'center', background: '#f8fafc' }}>
-                        <td style={{ padding: '12px 10px', fontWeight: 700, color: '#1d4ed8' }}>#{t.id}</td>
+                        <td style={{ padding: '12px 10px', fontWeight: 700, color: '#2563eb' }}>#{t.id}</td>
                         <td style={{ padding: '12px 10px', fontWeight: 600, color: '#1e293b' }}>{t.title}</td>
                         <td style={{ padding: '12px 10px', color: '#475569' }}>{t.area || 'N/A'}</td>
                         <td style={{ padding: '12px 10px' }}><StatusBadge status={t.status} /></td>
@@ -231,13 +231,16 @@ function KpiCard({ title, count, color, onClick }) {
   return (
     <motion.div 
       whileHover={{ y: -4, boxShadow: '0 6px 16px rgba(2, 62, 138, 0.15)' }}
-      style={{ background: 'var(--card-bg, #ffffff)', padding: '16px 8px 12px', borderRadius: '8px', borderTop: `3px solid ${color}`, borderLeft: '1px solid #e2e8f0', borderRight: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0', textAlign: 'center', boxShadow: '0 1px 3px rgba(0,0,0,0.03)', boxSizing: 'border-box', cursor: 'pointer' }}>
+      style={{ background: 'var(--card-bg, #ffffff)', padding: '16px 8px 12px', borderRadius: '10px', borderTop: `3px solid ${color}`, borderLeft: '1px solid #e2e8f0', borderRight: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0', textAlign: 'center', boxShadow: '0 1px 3px rgba(0,0,0,0.03)', boxSizing: 'border-box', cursor: 'pointer' }}>
       <div style={{ fontSize: '0.68rem', fontWeight: 800, color: '#4b5563', letterSpacing: '0.5px' }}>{title}</div>
       <div style={{ fontSize: '1.9rem', fontWeight: 800, color: color, margin: '4px 0 6px' }}>{count}</div>
-      <div onClick={onClick} style={{ fontSize: '0.75rem', color: '#1d4ed8', fontWeight: 600, cursor: 'pointer' }}>Ver detalles →</div>
+      <div onClick={onClick} style={{ fontSize: '0.75rem', color: '#2563eb', fontWeight: 600, cursor: 'pointer' }}>Ver detalles →</div>
     </motion.div>
   );
 }
+
+
+
 
 
 

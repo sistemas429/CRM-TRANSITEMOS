@@ -69,7 +69,7 @@ export default function ReportesPage() {
             <button onClick={fetchReportes} style={{ background: 'var(--card-bg, #ffffff)', color: '#198754', border: '1.5px solid #198754', padding: '7px 15px', borderRadius: '6px', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer' }}>
               🔄 Actualizar
             </button>
-            <button onClick={() => exportCSV('tickets_por_mes.csv', ['anio', 'mes', 'total'], porMes.map(m => [m.year, m.month, m.total]))} style={{ background: '#1d4ed8', color: '#fff', border: 'none', padding: '8px 15px', borderRadius: '6px', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer' }}>
+            <button onClick={() => exportCSV('tickets_por_mes.csv', ['anio', 'mes', 'total'], porMes.map(m => [m.year, m.month, m.total]))} style={{ background: '#2563eb', color: '#fff', border: 'none', padding: '8px 15px', borderRadius: '6px', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer' }}>
               ⬇️ Exportar CSV
             </button>
           </div>
@@ -82,7 +82,7 @@ export default function ReportesPage() {
         ) : (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '12px' }}>
             {/* TICKETS POR MES */}
-            <div style={{ background: '#fff', padding: '12px 14px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+            <div style={{ background: '#fff', padding: '12px 14px', borderRadius: '10px', border: '1px solid #e2e8f0', borderTop: '4px solid #0d6efd' }}>
               <h3 style={{ fontSize: '0.78rem', fontWeight: 800, color: '#4b5563', textTransform: 'uppercase', marginTop: 0 }}>Tickets por mes</h3>
               {porMes.length === 0 ? (
                 <p style={{ color: '#64748b', fontSize: '0.85rem' }}>Sin datos.</p>
@@ -91,8 +91,8 @@ export default function ReportesPage() {
                   <ComposedChart data={porMes.map(m => ({ name: `${MESES[m.month - 1]} ${m.year}`, total: m.total }))}>
                     <defs>
                       <linearGradient id="colorMes" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#5c7cfa" stopOpacity={0.35}/>
-                        <stop offset="95%" stopColor="#5c7cfa" stopOpacity={0}/>
+                        <stop offset="5%" stopColor="#2563eb" stopOpacity={0.5}/>
+                        <stop offset="95%" stopColor="#2563eb" stopOpacity={0}/>
                       </linearGradient>
                     </defs>
                     <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
@@ -101,14 +101,14 @@ export default function ReportesPage() {
                     <Tooltip />
                     <Legend />
                     <Area type="monotone" dataKey="total" stroke="none" fill="url(#colorMes)" />
-                    <Line type="monotone" dataKey="total" stroke="#5c7cfa" strokeWidth={3} dot={{ r: 4, fill: '#4263eb' }} activeDot={{ r: 6 }} />
+                    <Line type="monotone" dataKey="total" stroke="#2563eb" strokeWidth={3} dot={{ r: 4, fill: '#2563eb' }} activeDot={{ r: 6 }} />
                   </ComposedChart>
                 </ResponsiveContainer>
               )}
             </div>
 
             {/* TICKETS POR ÁREA */}
-            <div style={{ background: '#fff', padding: "12px 14px", borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+            <div style={{ background: '#fff', padding: "12px 14px", borderRadius: '10px', border: '1px solid #e2e8f0', borderTop: '4px solid #0d6efd' }}>
               <h3 style={{ fontSize: '0.78rem', fontWeight: 800, color: '#4b5563', textTransform: 'uppercase', marginTop: 0 }}>Tickets por área</h3>
               {porArea.length === 0 ? (
                 <p style={{ color: '#64748b', fontSize: '0.85rem' }}>Sin datos.</p>
@@ -132,7 +132,7 @@ export default function ReportesPage() {
             </div>
 
             {/* TICKETS POR PRIORIDAD */}
-            <div style={{ background: '#fff', padding: "12px 14px", borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+            <div style={{ background: '#fff', padding: "12px 14px", borderRadius: '10px', border: '1px solid #e2e8f0', borderTop: '4px solid #0d6efd' }}>
               <h3 style={{ fontSize: '0.78rem', fontWeight: 800, color: '#4b5563', textTransform: 'uppercase', marginTop: 0 }}>Tickets por prioridad</h3>
               {porPrioridad.length === 0 ? (
                 <p style={{ color: '#64748b', fontSize: '0.85rem' }}>Sin datos.</p>
@@ -156,15 +156,15 @@ export default function ReportesPage() {
             </div>
 
             {/* TIEMPO DE RESPUESTA */}
-            <div style={{ background: '#fff', padding: "12px 14px", borderRadius: '8px', border: '1px solid #e2e8f0', textAlign: 'center' }}>
+            <div style={{ background: '#fff', padding: "12px 14px", borderRadius: '10px', border: '1px solid #e2e8f0', borderTop: '4px solid #0d6efd', textAlign: 'center' }}>
               <h3 style={{ fontSize: '0.78rem', fontWeight: 800, color: '#4b5563', textTransform: 'uppercase', marginTop: 0 }}>Tiempo promedio de resolución</h3>
               {(() => {
                 const horas = tiempo?.average_hours;
                 const pct = horas != null ? Math.min((horas / 24) * 100, 100) : 0;
                 return (
-                  <div style={{ width: "110px", height: "110px", borderRadius: '50%', background: `conic-gradient(#1d4ed8 ${pct}%, #e2e8f0 ${pct}%)`, display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '0 auto 12px' }}>
+                  <div style={{ width: "110px", height: "110px", borderRadius: '50%', background: `conic-gradient(#2563eb ${pct}%, #e2e8f0 ${pct}%)`, display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '0 auto 12px' }}>
                     <div style={{ width: '92px', height: '92px', borderRadius: '50%', background: document.body.classList.contains('dark') ? '#1e293b' : '#fff', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                      <span style={{ fontSize: '1.6rem', fontWeight: 800, color: '#1d4ed8' }}>{horas != null ? `${horas.toFixed(1)}` : 'N/A'}</span>
+                      <span style={{ fontSize: '1.6rem', fontWeight: 800, color: '#2563eb' }}>{horas != null ? `${horas.toFixed(1)}` : 'N/A'}</span>
                       <span style={{ fontSize: '0.7rem', color: '#64748b' }}>horas</span>
                     </div>
                   </div>
@@ -180,6 +180,10 @@ export default function ReportesPage() {
     </AppLayout>
   );
 }
+
+
+
+
 
 
 

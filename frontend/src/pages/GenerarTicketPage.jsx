@@ -101,7 +101,7 @@ export default function GenerarTicketPage() {
 
   return (
     <AppLayout>
-      <div style={{ maxWidth: '680px', margin: '20px auto 0', background: 'var(--card-bg, #ffffff)', padding: '30px 36px', borderRadius: '10px', border: '1px solid #e9ecef', boxShadow: '0 2px 8px rgba(0,0,0,0.05)' }}>
+      <div style={{ maxWidth: '680px', margin: '20px auto 0', background: 'var(--card-bg, #ffffff)', padding: '30px 36px', borderRadius: '10px', border: '1px solid #e9ecef', boxShadow: '0 2px 8px rgba(0,0,0,0.05)', borderTop: '4px solid #0d6efd' }}>
         
         <div style={{ textAlign: 'center', marginBottom: '24px' }}>
           <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0d4b75', margin: 0 }}>
@@ -176,7 +176,7 @@ export default function GenerarTicketPage() {
           </div>
 
           {/* Vista previa de lo que se está diligenciando */}
-          <div style={{ background: '#f8fafc', border: '1px dashed #94a3b8', borderRadius: '8px', padding: '14px 16px' }}>
+          <div style={{ background: '#f8fafc', border: '1px dashed #94a3b8', borderRadius: '10px', padding: '14px 16px' }}>
             <h4 style={{ margin: '0 0 8px', fontSize: '0.78rem', fontWeight: 800, color: '#475569', textTransform: 'uppercase' }}>Vista previa del ticket</h4>
             <p style={{ margin: '0 0 4px', fontSize: '0.85rem' }}><strong>Título:</strong> {formData.title || '—'}</p>
             <p style={{ margin: '0 0 4px', fontSize: '0.85rem' }}><strong>Área:</strong> {formData.area || '—'} · <strong>Prioridad:</strong> {formData.priority}</p>
@@ -187,7 +187,7 @@ export default function GenerarTicketPage() {
             <button 
               type="submit" 
               disabled={loading}
-              style={{ flex: 1, background: '#1d4ed8', color: '#ffffff', border: 'none', padding: '11px', borderRadius: '6px', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer' }}>
+              style={{ flex: 1, background: '#2563eb', color: '#ffffff', border: 'none', padding: '11px', borderRadius: '6px', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer' }}>
               {loading ? 'Guardando...' : 'Guardar Ticket'}
             </button>
             <button 
@@ -202,6 +202,9 @@ export default function GenerarTicketPage() {
     </AppLayout>
   );
 }
+
+
+
 
 
 

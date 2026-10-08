@@ -114,7 +114,7 @@ export default function EstadoTicketsPage() {
               type="button"
               onClick={() => navigate('/generar-ticket')}
               style={{ 
-                background: '#1d4ed8', 
+                background: '#2563eb', 
                 color: '#ffffff', 
                 border: 'none', 
                 padding: '10px 20px', 
@@ -202,7 +202,7 @@ export default function EstadoTicketsPage() {
         </div>
 
         {/* Tabla Estilizada con Mismo Diseño del Dashboard */}
-        <div style={{ background: 'var(--card-bg, #ffffff)', padding: '20px', borderRadius: '8px', border: '1px solid #e9ecef', boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}>
+        <div style={{ background: 'var(--card-bg, #ffffff)', padding: '20px', borderRadius: '10px', border: '1px solid #e9ecef', boxShadow: '0 1px 3px rgba(0,0,0,0.05)', borderTop: '4px solid #0d6efd' }}>
           {loading ? (
             <Loading />
           ) : (
@@ -243,7 +243,7 @@ export default function EstadoTicketsPage() {
                           onChange={(e) => handleStatusChange(t, e.target.value)}
                           style={{ 
                             padding: '8px 12px', 
-                            borderRadius: '8px', 
+                            borderRadius: '10px', 
                             border: '1.5px solid #cbd5e1', 
                             fontSize: '0.82rem', 
                             fontWeight: 600,
@@ -293,7 +293,7 @@ export default function EstadoTicketsPage() {
               <p><strong>Actualizado por:</strong> {selectedTicket.updated_by}</p>
             )}
             <div style={{ display: 'flex', gap: '10px', marginTop: '12px' }}>
-              <button onClick={() => setSelectedTicket(null)} style={{ background: '#1d4ed8', color: '#fff', border: 'none', padding: '8px 20px', borderRadius: '6px', fontWeight: 700, cursor: 'pointer' }}>Cerrar</button>
+              <button onClick={() => setSelectedTicket(null)} style={{ background: '#2563eb', color: '#fff', border: 'none', padding: '8px 20px', borderRadius: '6px', fontWeight: 700, cursor: 'pointer' }}>Cerrar</button>
               {puedeEditar && selectedTicket.status !== 'Cerrado' && (
                 <button
                   onClick={() => {
@@ -312,6 +312,8 @@ export default function EstadoTicketsPage() {
     </AppLayout>
   );
 }
+
+
 
 
 

@@ -56,7 +56,7 @@ export default function RolesPage() {
 
   return (
     <AppLayout>
-      <div style={{ maxWidth: '640px', margin: '20px auto 0', background: '#fff', padding: '28px 32px', borderRadius: '10px', border: '1px solid #e9ecef' }}>
+      <div style={{ maxWidth: '640px', margin: '20px auto 0', background: '#fff', padding: '28px 32px', borderRadius: '10px', border: '1px solid #e9ecef', borderTop: '4px solid #0d6efd' }}>
         <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#0d4b75', marginTop: 0 }}>🛡️ Gestión de Roles</h2>
         <p style={{ fontSize: '0.82rem', color: '#64748b', marginTop: '-8px', marginBottom: '18px' }}>Roles disponibles y descripción de cada uno.</p>
         <ErrorBanner message={error} />
@@ -72,7 +72,7 @@ export default function RolesPage() {
             onChange={(e) => setDescripcion(e.target.value)}
             style={{ padding: '10px 14px', borderRadius: '6px', border: '1px solid #ced4da' }}
           />
-          <button type="submit" style={{ alignSelf: 'flex-start', background: '#1d4ed8', color: '#fff', border: 'none', padding: '10px 18px', borderRadius: '6px', fontWeight: 700, cursor: 'pointer' }}>+ Crear rol</button>
+          <button type="submit" style={{ alignSelf: 'flex-start', background: '#2563eb', color: '#fff', border: 'none', padding: '10px 18px', borderRadius: '6px', fontWeight: 700, cursor: 'pointer' }}>+ Crear rol</button>
         </form>
 
         {loading ? <Loading /> : (
@@ -103,6 +103,9 @@ export default function RolesPage() {
     </AppLayout>
   );
 }
+
+
+
 
 
 

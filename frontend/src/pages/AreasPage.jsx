@@ -53,7 +53,7 @@ export default function AreasPage() {
 
   return (
     <AppLayout>
-      <div style={{ maxWidth: '640px', margin: '20px auto 0', background: '#fff', padding: '28px 32px', borderRadius: '10px', border: '1px solid #e9ecef' }}>
+      <div style={{ maxWidth: '640px', margin: '20px auto 0', background: '#fff', padding: '28px 32px', borderRadius: '10px', border: '1px solid #e9ecef', borderTop: '4px solid #0d6efd' }}>
         <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#0d4b75', marginTop: 0 }}>🏢 Gestión de Áreas</h2>
         <p style={{ fontSize: '0.82rem', color: '#64748b', marginTop: '-8px', marginBottom: '18px' }}>Crea y administra las áreas de la oficina.</p>
         <ErrorBanner message={error} />
@@ -66,7 +66,7 @@ export default function AreasPage() {
             onChange={(e) => setNombre(e.target.value.toUpperCase())}
             style={{ flex: 1, padding: '10px 14px', borderRadius: '6px', border: '1px solid #ced4da', textTransform: 'uppercase' }}
           />
-          <button type="submit" style={{ background: '#1d4ed8', color: '#fff', border: 'none', padding: '10px 18px', borderRadius: '6px', fontWeight: 700, cursor: 'pointer' }}>+ Crear</button>
+          <button type="submit" style={{ background: '#2563eb', color: '#fff', border: 'none', padding: '10px 18px', borderRadius: '6px', fontWeight: 700, cursor: 'pointer' }}>+ Crear</button>
         </form>
 
         {loading ? <Loading /> : (
@@ -95,6 +95,9 @@ export default function AreasPage() {
     </AppLayout>
   );
 }
+
+
+
 
 
 

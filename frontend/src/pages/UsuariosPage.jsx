@@ -98,7 +98,7 @@ export default function UsuariosPage() {
 
   return (
     <AppLayout>
-      <div style={{ maxWidth: '800px', margin: '20px auto 0', background: '#fff', padding: '28px 32px', borderRadius: '10px', border: '1px solid #e9ecef' }}>
+      <div style={{ maxWidth: '800px', margin: '20px auto 0', background: '#fff', padding: '28px 32px', borderRadius: '10px', border: '1px solid #e9ecef', borderTop: '4px solid #0d6efd' }}>
         <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#0d4b75', marginTop: 0 }}>👥 Gestión de Usuarios</h2>
         <p style={{ fontSize: '0.82rem', color: '#64748b', marginTop: '-8px', marginBottom: '18px' }}>Administra cuentas, roles y acceso al sistema.</p>
         <ErrorBanner message={error} />
@@ -117,7 +117,7 @@ export default function UsuariosPage() {
           <select value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })} style={{ padding: '10px 14px', borderRadius: '6px', border: '1px solid #ced4da' }}>
             {rolesDisponibles.map(r => <option key={r.id} value={r.name}>{r.name}</option>)}
           </select>
-          <button type="submit" style={{ background: '#1d4ed8', color: '#fff', border: 'none', padding: '10px 18px', borderRadius: '6px', fontWeight: 700, cursor: 'pointer' }}>+ Crear</button>
+          <button type="submit" style={{ background: '#2563eb', color: '#fff', border: 'none', padding: '10px 18px', borderRadius: '6px', fontWeight: 700, cursor: 'pointer' }}>+ Crear</button>
         </form>
 
         {loading ? <Loading /> : (
@@ -150,7 +150,7 @@ export default function UsuariosPage() {
                     <button onClick={() => handleResetPassword(u)} style={{ background: '#0d4b75', color: '#fff', border: 'none', padding: '5px 12px', borderRadius: '6px', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer', marginRight: '6px' }}>
                       🔑 Contraseña
                     </button>
-                    <button onClick={() => handleToggleActivo(u)} style={{ background: u.is_active ? '#dc3545' : '#198754', color: '#fff', border: 'none', padding: '5px 12px', borderRadius: '6px', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer', marginRight: '6px' }}>
+                    <button onClick={() => handleToggleActivo(u)} style={{ background: u.is_active ? '#f87171' : '#34d399', color: '#fff', border: 'none', padding: '5px 12px', borderRadius: '6px', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer', marginRight: '6px' }}>
                       {u.is_active ? 'Desactivar' : 'Reactivar'}
                     </button>
                     <button onClick={() => handleDeleteUser(u)} style={{ background: '#dc3545', color: '#fff', border: 'none', padding: '5px 12px', borderRadius: '6px', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer' }}>
@@ -166,6 +166,9 @@ export default function UsuariosPage() {
     </AppLayout>
   );
 }
+
+
+
 
 
 

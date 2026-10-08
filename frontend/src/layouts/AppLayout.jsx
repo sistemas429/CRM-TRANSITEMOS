@@ -144,7 +144,7 @@ export default function AppLayout({ children }) {
         </div>
 
         {/* PERFIL INFERIOR */}
-        <div style={{ padding: '14px', background: 'rgba(0,0,0,0.2)', borderTop: '1px solid rgba(255,255,255,0.1)', textAlign: 'center' }}>
+        <div style={{ padding: '24px 14px', background: 'rgba(0,0,0,0.2)', borderTop: '1px solid rgba(255,255,255,0.1)', textAlign: 'center' }}>
           <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#ffffff' }}>{user?.username || 'Usuario'}</div>
           <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.6)', marginBottom: '8px' }}>{user?.username || ''} • {(role || '').toUpperCase()}</div>
           <div style={{ marginBottom: '8px' }}></div>
@@ -174,6 +174,9 @@ export default function AppLayout({ children }) {
     </div>
   );
 }
+
+
+
 
 
 
